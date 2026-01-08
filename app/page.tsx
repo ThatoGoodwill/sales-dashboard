@@ -53,20 +53,20 @@ export default function Home() {
             <BarChart3 className="h-12 w-12 text-white" />
           </div>
           <h1 className="text-gradient-blue text-5xl md:text-6xl font-bold mb-6">
-            VS CODE Sales Analytics Dashboard
+            VS CODE Sales Analytics 
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto">
             Interactive dashboard with advanced vscode sales data visualization
             for 2022-2024.
           </p>
-       <div className="flex flex-col sm:flex-row items-center gap-6">
+       <div className="flex flex-col sm:flex-row items-center gap-8">
   {/* Launch Dashboard Button */}
   <Link
     href="/dashboard"
     className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
   >
     <BarChart3 className="mr-3 h-5 w-5" />
-    Launch Dashboard
+Go to Dashboard
     <ArrowRight className="ml-3 h-5 w-5" />
   </Link>
 

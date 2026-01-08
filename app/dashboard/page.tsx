@@ -1,219 +1,54 @@
-// app/dashboard/page.tsx - UPDATED WITH NEW STYLES
-'use client';
+"use client";
 
-import React from 'react';
-import {
-  LineChart,
-  Line,
-  BarChart,
-  Bar,
-  PieChart,
-  Pie,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer
-} from 'recharts';
-import {
-  TrendingUp,
-  ShoppingCart,
-  DollarSign,
-  BarChart3,
-  PieChart as PieChartIcon,
-  Settings,
-  FileText,
-  LineChart as LineChartIcon,
-  Users,
-  Target,
-  Sparkles
-} from 'lucide-react';
+import { useState, useEffect } from "react";
+import Card from "@/components/charts/ui/Card";
+import FilterInput from "@/components/charts/ui/FilterInput";
+import ChartSwitcher from "@/components/charts/ui/ChartSwitcher";
+import SalesBarChart from "@/components/charts/SalesBarChart";
+import SalesLineChart from "@/components/charts/SalesLineChart";
+import SalesPieChart from "@/components/charts/SalesPieChart";
+import { salesData, yearlySummary, filterByThreshold } from "@/lib/data";
+import { formatCurrency } from "@/lib/utils";
+import { TrendingUp, DollarSign, Calendar, BarChart3, Sparkles, Users, Target, ShoppingCart } from "lucide-react";
 
-// Dashboard Data
-const monthlySalesData = [
-  { month: 'Jan', sales: 125000, orders: 1420 },
-  { month: 'Feb', sales: 132000, orders: 1480 },
-  { month: 'Mar', sales: 118000, orders: 1350 },
-  { month: 'Apr', sales: 145000, orders: 1620 },
-  { month: 'May', sales: 152000, orders: 1680 },
-  { month: 'Jun', sales: 148000, orders: 1580 },
-  { month: 'Jul', sales: 162000, orders: 1750 },
-  { month: 'Aug', sales: 158000, orders: 1720 },
-  { month: 'Sep', sales: 142000, orders: 1550 },
-  { month: 'Oct', sales: 168000, orders: 1850 },
-  { month: 'Nov', sales: 175000, orders: 1920 },
-  { month: 'Dec', sales: 182000, orders: 1980 }
-];
+type ChartType = "bar" | "line" | "pie";
 
-const yearlyComparison = [
-  { year: '2022', sales: 1350000, growth: 22.1 },
-  { year: '2023', sales: 1680000, growth: 24.4 },
-  { year: '2024', sales: 2090000, growth: 24.4 }
-];
+export default function DashboardPage() {
+  const [chartType, setChartType] = useState<ChartType>("bar");
+  const [threshold, setThreshold] = useState(0);
+  const [filteredData, setFilteredData] = useState(salesData);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-const categoryData = [
-  { name: 'Electronics', value: 35, color: '#3b82f6' },
-  { name: 'Clothing', value: 25, color: '#8b5cf6' },
-  { name: 'Home Goods', value: 20, color: '#10b981' },
-  { name: 'Books', value: 15, color: '#f59e0b' },
-  { name: 'Other', value: 5, color: '#ef4444' }
-];
-
-const sidebarItems = [
-  { icon: BarChart3, label: 'Dashboard', active: true },
-  { icon: LineChartIcon, label: 'Analytics' },
-  { icon: FileText, label: 'Reports' },
-  { icon: Settings, label: 'Settings' }
-];
-
-const statCards = [
-  {
-    title: 'Total Sales',
-    value: '$1.46M',
-    change: '+29.4%',
-    icon: DollarSign,
-    color: 'bg-gradient-to-br from-blue-500 to-blue-600',
-    trend: 'up'
-  },
-  {
-    title: 'Total Orders',
-    value: '1,850',
-    change: '+29.4%',
-    icon: ShoppingCart,
-    color: 'bg-gradient-to-br from-purple-500 to-purple-600',
-    trend: 'up'
-  },
-  {
-    title: 'Net Profit',
-    value: '$262K',
-    change: '+37.0%',
-    icon: TrendingUp,
-    color: 'bg-gradient-to-br from-green-500 to-green-600',
-    trend: 'up'
-  },
-  {
-    title: 'Avg. Order Value',
-    value: '$67',
-    change: '+5.2%',
-    icon: Target,
-    color: 'bg-gradient-to-br from-amber-500 to-amber-600',
-    trend: 'up'
-  }
-];
-
-const chartButtons = [
-  { label: 'Min Sales', icon: BarChart3, type: 'bar' },
-  { label: 'Ui Bar', icon: BarChart3, type: 'bar' },
-  { label: 'Line', icon: LineChartIcon, type: 'line' },
-  { label: 'Pie', icon: PieChartIcon, type: 'pie' }
-];
-
-export default function SalesDashboard() {
-  const [activeChart, setActiveChart] = React.useState('line');
-  const [isDarkMode, setIsDarkMode] = React.useState(false);
+  useEffect(() => {
+    setFilteredData(filterByThreshold(salesData, threshold));
+  }, [threshold]);
 
   const renderChart = () => {
-    switch (activeChart) {
-      case 'bar':
-        return (
-          <BarChart data={monthlySalesData}>
-            <CartesianGrid strokeDasharray="3 3" stroke={isDarkMode ? '#374151' : '#e5e7eb'} />
-            <XAxis dataKey="month" stroke={isDarkMode ? '#9ca3af' : '#6b7280'} />
-            <YAxis stroke={isDarkMode ? '#9ca3af' : '#6b7280'} />
-            <Tooltip contentStyle={{ 
-              backgroundColor: isDarkMode ? '#1f2937' : 'white',
-              borderColor: isDarkMode ? '#374151' : '#e5e7eb',
-              borderRadius: '0.5rem'
-            }} />
-            <Legend />
-            <Bar 
-              dataKey="sales" 
-              fill="#3b82f6" 
-              name="Sales ($)" 
-              radius={[4, 4, 0, 0]}
-            />
-            <Bar 
-              dataKey="orders" 
-              fill="#8b5cf6" 
-              name="Orders" 
-              radius={[4, 4, 0, 0]}
-            />
-          </BarChart>
-        );
-      case 'pie':
-        return (
-          <PieChart>
-            <Pie
-              data={categoryData}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              label={({ name, percent }) => `${name}: ${((percent || 0) * 100).toFixed(0)}%`}
-              outerRadius={120}
-              fill="#8884d8"
-              dataKey="value"
-            >
-              {categoryData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.color} />
-              ))}
-            </Pie>
-            <Tooltip contentStyle={{ 
-              backgroundColor: isDarkMode ? '#1f2937' : 'white',
-              borderColor: isDarkMode ? '#374151' : '#e5e7eb',
-              borderRadius: '0.5rem'
-            }} />
-            <Legend />
-          </PieChart>
-        );
+    switch (chartType) {
+      case "bar":
+        return <SalesBarChart data={filteredData} isDarkMode={isDarkMode} />;
+      case "line":
+        return <SalesLineChart data={filteredData} isDarkMode={isDarkMode} />;
+      case "pie":
+        return <SalesPieChart data={filteredData} isDarkMode={isDarkMode} />;
       default:
-        return (
-          <LineChart data={monthlySalesData}>
-            <CartesianGrid strokeDasharray="3 3" stroke={isDarkMode ? '#374151' : '#e5e7eb'} />
-            <XAxis dataKey="month" stroke={isDarkMode ? '#9ca3af' : '#6b7280'} />
-            <YAxis stroke={isDarkMode ? '#9ca3af' : '#6b7280'} />
-            <Tooltip contentStyle={{ 
-              backgroundColor: isDarkMode ? '#1f2937' : 'white',
-              borderColor: isDarkMode ? '#374151' : '#e5e7eb',
-              borderRadius: '0.5rem'
-            }} />
-            <Legend />
-            <Line
-              type="monotone"
-              dataKey="sales"
-              stroke="#3b82f6"
-              strokeWidth={3}
-              dot={{ r: 4, fill: '#3b82f6' }}
-              activeDot={{ r: 6, fill: '#2563eb' }}
-              name="Sales ($)"
-            />
-            <Line
-              type="monotone"
-              dataKey="orders"
-              stroke="#8b5cf6"
-              strokeWidth={3}
-              dot={{ r: 4, fill: '#8b5cf6' }}
-              name="Orders"
-            />
-          </LineChart>
-        );
+        return <SalesBarChart data={filteredData} isDarkMode={isDarkMode} />;
     }
   };
 
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'dark bg-gray-900' : 'bg-gradient-to-br from-blue-50 to-purple-50'} p-4 md:p-8`}>
-      <div className="max-w-7xl mx-auto">
+    <div className={`min-h-screen ${isDarkMode ? 'dark bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-br from-blue-50 to-purple-50'} p-4 md:p-8`}>
+      <div className="max-w-7xl mx-auto space-y-8">
         {/* Header with gradient */}
-        <div className="mb-8 flex justify-between items-center">
+        <div className="flex justify-between items-center">
           <div>
-            <h1 className="gradient-text text-4xl font-bold">SalesView</h1>
-            <p className="text-gray-600 dark:text-gray-300 mt-2">Analytics Dashboard</p>
+            <h1 className="gradient-text text-4xl font-bold">SalesView Dashboard</h1>
+            <p className="text-gray-600 dark:text-gray-300 mt-2">Visualize and analyze sales performance across years</p>
           </div>
           <div className="flex items-center gap-4">
             <button 
               onClick={() => setIsDarkMode(!isDarkMode)}
-              className="btn-gradient flex items-center gap-2"
+              className="btn-gradient flex items-center gap-2 px-4 py-2.5"
             >
               <Sparkles className="w-4 h-4" />
               {isDarkMode ? 'Light Mode' : 'Dark Mode'}
@@ -224,161 +59,232 @@ export default function SalesDashboard() {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Sidebar with glass effect */}
-          <div className="lg:w-64 flex-shrink-0">
-            <div className="glass-effect rounded-2xl p-6 mb-8 card-hover">
-              <h2 className="gradient-text-alt text-xl font-bold mb-2">Sales Dashboard</h2>
-              <p className="text-gray-600 dark:text-gray-300 text-sm mb-6">
-                Monitor your sales performance across years
-              </p>
-              <nav className="space-y-2">
-                {sidebarItems.map((item) => (
-                  <button
-                    key={item.label}
-                    className={`flex items-center gap-3 w-full p-3 rounded-xl transition-all duration-300 ${
-                      item.active
-                        ? 'gradient-bg text-white shadow-lg'
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                    }`}
-                  >
-                    <item.icon className="w-5 h-5" />
-                    <span className="font-medium">{item.label}</span>
-                  </button>
-                ))}
-              </nav>
+        {/* Summary Cards with Enhanced Gradients */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="gradient-border-card card-hover p-6 rounded-2xl">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-blue-100 dark:text-blue-200 text-sm font-medium">Total Revenue 2024</p>
+                <h3 className="gradient-text text-3xl font-bold mt-2">{formatCurrency(yearlySummary[2024].total)}</h3>
+              </div>
+              <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg">
+                <DollarSign className="h-8 w-8 text-white" />
+              </div>
+            </div>
+            <div className="flex items-center mt-6">
+              <TrendingUp className="h-5 w-5 text-green-400 mr-2" />
+              <span className="text-gray-300 dark:text-gray-400 text-sm">
+                {yearlySummary[2024].growth.toFixed(1)}% growth from 2023
+              </span>
+            </div>
+            <div className="mt-4 h-2 bg-gray-700 dark:bg-gray-800 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-blue-500 to-blue-600"
+                style={{ width: '85%' }}
+              ></div>
             </div>
           </div>
 
-          {/* Main Content */}
-          <div className="flex-1">
-            {/* Yearly Comparison Table */}
-            <div className="gradient-border-card card-hover mb-8">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-gray-200 dark:border-gray-700">
-                      <th className="text-left py-4 px-4 text-gray-500 dark:text-gray-400 font-medium"></th>
-                      {yearlyComparison.map((year) => (
-                        <th key={year.year} className="text-center py-4 px-4">
-                          <span className="gradient-text font-bold text-lg">{year.year}</span>
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="py-5 px-4 text-gray-700 dark:text-gray-300 font-semibold">Total Sales</td>
-                      {yearlyComparison.map((year) => (
-                        <td key={year.year} className="text-center py-5 px-4">
-                          <div className="font-bold text-gray-900 dark:text-white text-xl">
-                            ${(year.sales / 1000000).toFixed(2)}M
-                          </div>
-                          <div className="text-green-600 dark:text-green-400 text-sm font-semibold mt-1">
-                            +{year.growth}%
-                          </div>
-                        </td>
-                      ))}
-                    </tr>
-                  </tbody>
-                </table>
+          <div className="gradient-border-card card-hover p-6 rounded-2xl">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-green-100 dark:text-green-200 text-sm font-medium">Monthly Average</p>
+                <h3 className="gradient-text-alt text-3xl font-bold mt-2">{formatCurrency(yearlySummary[2024].average)}</h3>
+              </div>
+              <div className="p-3 rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg">
+                <BarChart3 className="h-8 w-8 text-white" />
               </div>
             </div>
-
-            {/* Stat Cards with gradients */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-              {statCards.map((card) => (
-                <div key={card.title} className="glass-effect rounded-2xl p-6 card-hover">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`p-3 rounded-xl ${card.color} shadow-lg`}>
-                      <card.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <span className={`text-sm font-semibold px-3 py-1 rounded-full ${
-                      card.trend === 'up' 
-                        ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
-                        : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
-                    }`}>
-                      {card.change}
-                    </span>
-                  </div>
-                  <h3 className="text-gray-500 dark:text-gray-400 text-sm font-medium mb-1">
-                    {card.title}
-                  </h3>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">{card.value}</p>
-                  <div className="mt-4 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                    <div 
-                      className={`h-full ${card.color.replace('bg-gradient-to-br', 'bg-gradient-to-r')}`}
-                      style={{ width: '85%' }}
-                    ></div>
-                  </div>
-                </div>
-              ))}
+            <div className="mt-6">
+              <span className="text-gray-300 dark:text-gray-400 text-sm">Consistent growth across all months</span>
             </div>
+            <div className="mt-4 h-2 bg-gray-700 dark:bg-gray-800 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-green-500 to-green-600"
+                style={{ width: '78%' }}
+              ></div>
+            </div>
+          </div>
 
-            {/* Chart Section */}
-            <div className="glass-effect rounded-2xl p-6 mb-8">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
+          <div className="gradient-border-card card-hover p-6 rounded-2xl">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-purple-100 dark:text-purple-200 text-sm font-medium">Performance Period</p>
+                <h3 className="text-3xl font-bold mt-2 gradient-text">2022-2024</h3>
+              </div>
+              <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg">
+                <Calendar className="h-8 w-8 text-white" />
+              </div>
+            </div>
+            <div className="mt-6">
+              <span className="text-gray-300 dark:text-gray-400 text-sm">3 years of sales data analysis</span>
+            </div>
+            <div className="mt-4 h-2 bg-gray-700 dark:bg-gray-800 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-purple-500 to-purple-600"
+                style={{ width: '100%' }}
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Chart Area */}
+          <div className="lg:col-span-2">
+            <div className="glass-effect rounded-2xl p-6 card-hover">
+              <div className="flex justify-between items-center mb-6">
                 <div>
-                  <h2 className="gradient-text text-2xl font-bold">Monthly Sales Overview</h2>
-                  <p className="text-gray-600 dark:text-gray-300">Sales performance for 2024</p>
+                  <h2 className="gradient-text text-2xl font-bold">Monthly Sales Analysis</h2>
+                  <p className="text-gray-600 dark:text-gray-300">Interactive visualization of sales performance</p>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {chartButtons.map((button) => (
-                    <button
-                      key={button.label}
-                      onClick={() => setActiveChart(button.type)}
-                      className={`px-4 py-2.5 rounded-xl flex items-center gap-2 text-sm font-medium transition-all duration-300 ${
-                        activeChart === button.type
-                          ? 'gradient-bg text-white shadow-lg'
-                          : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-                      }`}
-                    >
-                      <button.icon className="w-4 h-4" />
-                      {button.label}
-                    </button>
-                  ))}
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  Showing data filtered by: <span className="font-semibold text-blue-600 dark:text-blue-400">${threshold.toLocaleString()}+</span>
                 </div>
               </div>
-
-              <div className="h-96">
-                <ResponsiveContainer width="100%" height="100%">
+              <div className="space-y-6">
+                <div className="flex justify-between items-center">
+                  <div className="flex space-x-2">
+                    {["bar", "line", "pie"].map((type) => (
+                      <button
+                        key={type}
+                        onClick={() => setChartType(type as ChartType)}
+                        className={`px-4 py-2.5 rounded-xl flex items-center gap-2 text-sm font-medium transition-all duration-300 ${
+                          chartType === type
+                            ? 'gradient-bg text-white shadow-lg'
+                            : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                        }`}
+                      >
+                        {type === "bar" && <BarChart3 className="w-4 h-4" />}
+                        {type === "line" && <TrendingUp className="w-4 h-4" />}
+                        {type === "pie" && <Target className="w-4 h-4" />}
+                        {type.charAt(0).toUpperCase() + type.slice(1)} Chart
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="h-[400px] rounded-xl overflow-hidden bg-white/50 dark:bg-gray-800/50 p-4">
                   {renderChart()}
-                </ResponsiveContainer>
-              </div>
-              
-              {/* Chart stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                <div className="text-center p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20">
-                  <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">$160K</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Peak Month</div>
-                </div>
-                <div className="text-center p-4 rounded-xl bg-purple-50 dark:bg-purple-900/20">
-                  <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">$120K</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Avg Monthly</div>
-                </div>
-                <div className="text-center p-4 rounded-xl bg-green-50 dark:bg-green-900/20">
-                  <div className="text-2xl font-bold text-green-600 dark:text-green-400">+37.0%</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Growth Rate</div>
-                </div>
-                <div className="text-center p-4 rounded-xl bg-amber-50 dark:bg-amber-900/20">
-                  <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">$67</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Order Value</div>
                 </div>
               </div>
-            </div>
-
-            {/* Additional Info */}
-            <div className="text-center text-gray-500 dark:text-gray-400 text-sm">
-              <p className="flex items-center justify-center gap-2">
-                <span className="w-2 h-2 gradient-bg rounded-full animate-pulse"></span>
-                Dashboard built with Next.js 15, TypeScript, Tailwind CSS & Recharts
-              </p>
-              <p className="mt-2">
-                <span className="inline-block w-3 h-3 bg-green-500 rounded-full mr-2"></span>
-                Data updates in real-time • Last updated: Today
-              </p>
             </div>
           </div>
+
+          {/* Filters and Summary */}
+          <div className="space-y-8">
+            <div className="glass-effect rounded-2xl p-6 card-hover">
+              <h3 className="gradient-text-alt text-xl font-bold mb-4">Data Filters</h3>
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Sales Threshold</label>
+                  <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                    ${threshold.toLocaleString()}
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="200000"
+                  step="10000"
+                  value={threshold}
+                  onChange={(e) => setThreshold(Number(e.target.value))}
+                  className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer slider-gradient"
+                />
+                <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-2">
+                  <span>$0</span>
+                  <span>$100K</span>
+                  <span>$200K</span>
+                </div>
+              </div>
+              <div className="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
+                <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Filter Information</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Adjust the slider to filter months with sales above a certain threshold. 
+                  This helps identify high-performing periods.
+                </p>
+              </div>
+            </div>
+
+            <div className="glass-effect rounded-2xl p-6 card-hover">
+              <h3 className="gradient-text text-xl font-bold mb-4">Yearly Summary</h3>
+              <div className="space-y-4">
+                {Object.entries(yearlySummary).map(([year, data]) => (
+                  <div key={year} className="flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <div>
+                      <span className="font-bold text-gray-900 dark:text-white text-lg">{year}</span>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Total Sales</p>
+                    </div>
+                    <div className="text-right">
+                      <div className="font-bold text-gray-900 dark:text-white text-lg">{formatCurrency(data.total)}</div>
+                      <div className={`text-sm font-semibold ${Number(year) > 2022 ? "text-green-500" : "text-gray-500"}`}>
+                        {Number(year) > 2022 ? `+${data.growth}% growth` : "Base year"}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Data Table */}
+        <div className="glass-effect rounded-2xl p-6 card-hover">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="gradient-text text-2xl font-bold">Monthly Sales Data</h2>
+            <div className="text-sm text-gray-500 dark:text-gray-400">
+              Showing {filteredData.length} of {salesData.length} months
+            </div>
+          </div>
+          <div className="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-gray-50 dark:bg-gray-800/50">
+                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">Month</th>
+                  <th className="text-right py-4 px-6 font-semibold text-gray-900 dark:text-white">2022 Sales</th>
+                  <th className="text-right py-4 px-6 font-semibold text-gray-900 dark:text-white">2023 Sales</th>
+                  <th className="text-right py-4 px-6 font-semibold text-gray-900 dark:text-white">2024 Sales</th>
+                  <th className="text-right py-4 px-6 font-semibold text-gray-900 dark:text-white">Growth (22-24)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredData.map((row, index) => {
+                  const growth = ((row[2024] - row[2022]) / row[2022]) * 100;
+                  return (
+                    <tr 
+                      key={row.month} 
+                      className={`border-b border-gray-100 dark:border-gray-800 ${
+                        index % 2 === 0 ? 'bg-white/50 dark:bg-gray-900/50' : 'bg-gray-50/50 dark:bg-gray-800/50'
+                      } hover:bg-blue-50/50 dark:hover:bg-gray-800 transition-colors`}
+                    >
+                      <td className="py-4 px-6 font-medium text-gray-900 dark:text-white">{row.month}</td>
+                      <td className="text-right py-4 px-6 text-gray-700 dark:text-gray-300">{formatCurrency(row[2022])}</td>
+                      <td className="text-right py-4 px-6 text-gray-700 dark:text-gray-300">{formatCurrency(row[2023])}</td>
+                      <td className="text-right py-4 px-6 font-semibold text-gray-900 dark:text-white">{formatCurrency(row[2024])}</td>
+                      <td className={`text-right py-4 px-6 font-bold ${
+                        growth > 0 ? "text-green-500" : "text-red-500"
+                      }`}>
+                        <div className="flex items-center justify-end">
+                          {growth > 0 ? <TrendingUp className="w-4 h-4 mr-2" /> : null}
+                          {growth > 0 ? "+" : ""}{growth.toFixed(1)}%
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="text-center text-gray-500 dark:text-gray-400 text-sm">
+          <p className="flex items-center justify-center gap-2">
+            <span className="w-2 h-2 gradient-bg rounded-full animate-pulse"></span>
+            Sales Dashboard built with Next.js, TypeScript, Tailwind CSS & Recharts
+          </p>
+          <p className="mt-2">
+            <span className="inline-block w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+            Real-time data updates • Last refresh: {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          </p>
         </div>
       </div>
     </div>

@@ -1,11 +1,39 @@
-"use client"; // ADD THIS LINE - Your home page needs to be a client component!
+"use client";
 
-import { useState } from "react"; // ADD THIS IMPORT
+import { useState, useEffect } from "react";
 import { ArrowRight, BarChart3, TrendingUp, Filter, Sparkles, Shield, Zap, Users } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
-  const [isDarkMode, setIsDarkMode] = useState(false); // Dark mode state
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Load dark mode from localStorage on mount
+  useEffect(() => {
+    const savedMode = localStorage.getItem("darkMode");
+    const isDark = savedMode === "true";
+    setIsDarkMode(isDark);
+    
+    // Apply to HTML
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
+  // Toggle dark mode and save to localStorage
+  const toggleDarkMode = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    localStorage.setItem("darkMode", newMode.toString());
+    
+    // Apply to HTML
+    if (newMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
@@ -31,7 +59,7 @@ export default function Home() {
               <ArrowRight className="ml-3 h-6 w-6" />
             </Link>
             <button 
-              onClick={() => setIsDarkMode(!isDarkMode)}
+              onClick={toggleDarkMode}
               className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl border-2 border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
             >
               <Sparkles className="mr-3 h-5 w-5" />

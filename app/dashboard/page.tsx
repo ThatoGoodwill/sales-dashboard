@@ -26,13 +26,13 @@ export default function DashboardPage() {
   const renderChart = () => {
     switch (chartType) {
       case "bar":
-        return <SalesBarChart data={filteredData} isDarkMode={isDarkMode} />;
+       return <SalesBarChart data={filteredData} />;
       case "line":
-        return <SalesLineChart data={filteredData} isDarkMode={isDarkMode} />;
+        return <SalesLineChart data={filteredData} />;
       case "pie":
-        return <SalesPieChart data={filteredData} isDarkMode={isDarkMode} />;
+       return <SalesPieChart data={filteredData} />;
       default:
-        return <SalesBarChart data={filteredData} isDarkMode={isDarkMode} />;
+      return <SalesBarChart data={filteredData} />;
     }
   };
 

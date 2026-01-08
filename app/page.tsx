@@ -43,14 +43,14 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="max-w-6xl mx-auto py-16 px-4">
         {/* Hero Section with Glass Effect */}
         <div className="glass-effect rounded-3xl p-8 md:p-12 text-center mb-16 card-hover">
-          <div className="inline-block p-3 rounded-2xl gradient-bg mb-6">
+          <div className="inline-block p-3 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 mb-6">
             <BarChart3 className="h-12 w-12 text-white" />
           </div>
-          <h1 className="gradient-text text-5xl md:text-6xl font-bold mb-6">
+          <h1 className="text-gradient-blue text-5xl md:text-6xl font-bold mb-6">
             VS CODE Sales Analytics Dashboard
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto">
@@ -60,7 +60,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/dashboard"
-              className="btn-gradient inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl"
+              className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 transition-all duration-300"
             >
               Launch Dashboard
               <ArrowRight className="ml-3 h-6 w-6" />
@@ -78,11 +78,11 @@ export default function Home() {
 
         {/* Features Grid with Gradient Borders */}
         <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <div className="gradient-border-card card-hover p-8 rounded-2xl">
+          <div className="border-2 border-blue-200 dark:border-blue-800/30 card-hover p-8 rounded-2xl">
             <div className="inline-block p-4 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 mb-6">
               <TrendingUp className="h-8 w-8 text-white" />
             </div>
-            <h3 className="gradient-text-alt text-2xl font-bold mb-4">
+            <h3 className="text-2xl font-bold text-blue-700 dark:text-blue-400 mb-4">
               Multi-Year Data Analysis
             </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
@@ -90,41 +90,41 @@ export default function Home() {
               interactive visualizations and growth metrics.
             </p>
             <div className="flex items-center text-sm text-blue-600 dark:text-blue-400">
-              <span className="inline-block w-3 h-3 gradient-bg rounded-full mr-2"></span>
+              <span className="inline-block w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
               Real-time analytics
             </div>
           </div>
 
-          <div className="gradient-border-card card-hover p-8 rounded-2xl">
-            <div className="inline-block p-4 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 mb-6">
+          <div className="border-2 border-blue-200 dark:border-blue-800/30 card-hover p-8 rounded-2xl">
+            <div className="inline-block p-4 rounded-xl bg-gradient-to-br from-cyan-500 to-cyan-600 mb-6">
               <BarChart3 className="h-8 w-8 text-white" />
             </div>
-            <h3 className="gradient-text text-2xl font-bold mb-4">
+            <h3 className="text-2xl font-bold text-cyan-700 dark:text-cyan-400 mb-4">
               Interactive Charts
             </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
               Switch between bar, line, and pie charts for different insights
               with smooth animations.
             </p>
-            <div className="flex items-center text-sm text-purple-600 dark:text-purple-400">
-              <span className="inline-block w-3 h-3 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full mr-2"></span>
+            <div className="flex items-center text-sm text-cyan-600 dark:text-cyan-400">
+              <span className="inline-block w-3 h-3 bg-cyan-500 rounded-full mr-2"></span>
               Multiple visualization options
             </div>
           </div>
 
-          <div className="gradient-border-card card-hover p-8 rounded-2xl">
-            <div className="inline-block p-4 rounded-xl bg-gradient-to-br from-green-500 to-green-600 mb-6">
+          <div className="border-2 border-blue-200 dark:border-blue-800/30 card-hover p-8 rounded-2xl">
+            <div className="inline-block p-4 rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 mb-6">
               <Filter className="h-8 w-8 text-white" />
             </div>
-            <h3 className="gradient-text-alt text-2xl font-bold mb-4">
+            <h3 className="text-2xl font-bold text-teal-700 dark:text-teal-400 mb-4">
               Custom Filters
             </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
               Set custom sales thresholds to filter and analyze data with
               precision and advanced controls.
             </p>
-            <div className="flex items-center text-sm text-green-600 dark:text-green-400">
-              <span className="inline-block w-3 h-3 bg-gradient-to-r from-green-500 to-green-600 rounded-full mr-2"></span>
+            <div className="flex items-center text-sm text-teal-600 dark:text-teal-400">
+              <span className="inline-block w-3 h-3 bg-teal-500 rounded-full mr-2"></span>
               Dynamic data filtering
             </div>
           </div>
@@ -132,16 +132,16 @@ export default function Home() {
 
         {/* Stats Section */}
         <div className="glass-effect rounded-3xl p-8 mb-16">
-          <h2 className="gradient-text text-3xl font-bold text-center mb-12">
+          <h2 className="text-gradient-blue text-3xl font-bold text-center mb-12">
             Dashboard Highlights
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="text-center p-6 rounded-xl bg-blue-50 dark:bg-blue-900/20">
-              <div className="text-4xl font-bold gradient-text mb-2">3+</div>
+              <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">3+</div>
               <div className="text-gray-600 dark:text-gray-400">Years of Data</div>
             </div>
-            <div className="text-center p-6 rounded-xl bg-purple-50 dark:bg-purple-900/20">
-              <div className="text-4xl font-bold gradient-text-alt mb-2">6+</div>
+            <div className="text-center p-6 rounded-xl bg-cyan-50 dark:bg-cyan-900/20">
+              <div className="text-4xl font-bold text-cyan-600 dark:text-cyan-400 mb-2">6+</div>
               <div className="text-gray-600 dark:text-gray-400">Chart Types</div>
             </div>
             <div className="text-center p-6 rounded-xl bg-green-50 dark:bg-green-900/20">
@@ -157,7 +157,7 @@ export default function Home() {
 
         {/* CTA Section */}
         <div className="text-center">
-          <div className="gradient-bg-animated rounded-3xl p-12 mb-8">
+          <div className="rounded-3xl p-12 mb-8 bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-700">
             <h2 className="text-3xl font-bold text-white mb-4">
               Ready to Transform Your Sales Analysis?
             </h2>
@@ -177,7 +177,8 @@ export default function Home() {
           {/* Footer Note */}
           <div className="text-center text-gray-500 dark:text-gray-400 text-sm">
             <p className="flex items-center justify-center gap-2">
-              <span className="w-2 h-2 gradient-bg rounded-full animate-pulse"></span>
+              <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+              Powered by Next.js 15, TypeScript, Tailwind CSS & Recharts
             </p>
             <p className="mt-2">
               <span className="inline-block w-3 h-3 bg-green-500 rounded-full mr-2"></span>

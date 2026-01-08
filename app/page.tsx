@@ -1,19 +1,12 @@
+"use client"; // ADD THIS LINE - Your home page needs to be a client component!
+
+import { useState } from "react"; // ADD THIS IMPORT
 import { ArrowRight, BarChart3, TrendingUp, Filter, Sparkles, Shield, Zap, Users } from "lucide-react";
 import Link from "next/link";
 
-// Add this useState at the top of your component
-const [isDarkMode, setIsDarkMode] = useState(false);
-
-// Add this button next to the main CTA button:
-<button 
-  onClick={() => setIsDarkMode(!isDarkMode)}
-  className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
->
-  <Sparkles className="mr-2 h-4 w-4" />
-  {isDarkMode ? 'Switch to Light' : 'Switch to Dark'}
-</button>
-
 export default function Home() {
+  const [isDarkMode, setIsDarkMode] = useState(false); // Dark mode state
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="max-w-6xl mx-auto py-16 px-4">
@@ -37,9 +30,12 @@ export default function Home() {
               Launch Dashboard
               <ArrowRight className="ml-3 h-6 w-6" />
             </Link>
-            <button className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl border-2 border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+            <button 
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl border-2 border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
+            >
               <Sparkles className="mr-3 h-5 w-5" />
-              View Features
+              {isDarkMode ? 'Switch to Light' : 'Switch to Dark'}
             </button>
           </div>
         </div>

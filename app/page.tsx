@@ -44,11 +44,11 @@ export default function Home() {
             <BarChart3 className="h-12 w-12 text-white" />
           </div>
           <h1 className="gradient-text text-5xl md:text-6xl font-bold mb-6">
-            Sales Analytics Dashboard
+           VS CODE Sales Analytics Dashboard
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto">
-            Interactive dashboard with advanced sales data visualization for 2022-2024. 
-            Built with Next.js 15, TypeScript, and Tailwind CSS.
+            Interactive dashboard with advanced vs code sales data visualization for 2022-2024. 
+            
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -133,38 +133,11 @@ export default function Home() {
               <div className="text-4xl font-bold text-amber-600 dark:text-amber-400 mb-2">24/7</div>
               <div className="text-gray-600 dark:text-gray-400">Real-time Updates</div>
             </div>
-          </div>
-        </div>
+         
 
-        {/* Additional Features */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          <div className="glass-effect rounded-2xl p-8 card-hover">
-            <div className="flex items-start mb-6">
-              <div className="p-3 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 mr-4">
-                <Shield className="h-6 w-6 text-white" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Secure & Reliable</h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  Enterprise-grade security with encrypted data transmission and secure authentication.
-                </p>
-              </div>
-            </div>
-          </div>
+       
 
-          <div className="glass-effect rounded-2xl p-8 card-hover">
-            <div className="flex items-start mb-6">
-              <div className="p-3 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 mr-4">
-                <Zap className="h-6 w-6 text-white" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Lightning Fast</h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  Built with Next.js 15 and Turbopack for instant loading and smooth interactions.
-                </p>
-              </div>
-            </div>
-          </div>
+          
         </div>
 
         {/* CTA Section */}
@@ -187,7 +160,7 @@ export default function Home() {
           <div className="text-center text-gray-500 dark:text-gray-400 text-sm">
             <p className="flex items-center justify-center gap-2">
               <span className="w-2 h-2 gradient-bg rounded-full animate-pulse"></span>
-              Powered by Next.js 15, TypeScript, Tailwind CSS & Recharts
+             
             </p>
             <p className="mt-2">
               <span className="inline-block w-3 h-3 bg-green-500 rounded-full mr-2"></span>

@@ -32,7 +32,16 @@ import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
   const pathname = usePathname();
-  const [expandedSections, setExpandedSections] = useState({
+  
+  // Define the type for expandedSections
+  type ExpandedSections = {
+    navigation: boolean;
+    analytics: boolean;
+    settings: boolean;
+    exports: boolean;
+  };
+  
+  const [expandedSections, setExpandedSections] = useState<ExpandedSections>({
     navigation: true,
     analytics: true,
     settings: false,
@@ -43,12 +52,14 @@ const Sidebar = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [activeItem, setActiveItem] = useState("dashboard");
 
-  const toggleSection = (section: string) => {
+  // FIXED: Add proper type for section parameter
+  const toggleSection = (section: keyof ExpandedSections) => {
     setExpandedSections(prev => ({
       ...prev,
       [section]: !prev[section]
     }));
   };
+
 
   const toggleDarkMode = () => {
     const newMode = !darkMode;

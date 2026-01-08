@@ -8,6 +8,8 @@ import {
   Filter,
   Sparkles,
   Users,
+  Sun,    // ← ADD THIS
+  Moon,   // ← ADD THIS (if not already there)
 } from "lucide-react";
 import Link from "next/link";
 

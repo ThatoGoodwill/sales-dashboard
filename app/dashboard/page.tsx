@@ -70,8 +70,8 @@ export default function DashboardPage() {
         {/* Header with gradient */}
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="gradient-text text-4xl font-bold">SalesView Dashboard</h1>
-            <p className="text-gray-600 dark:text-gray-300 mt-2">Visualize and analyze sales performance across years</p>
+            <h1 className="lex justify-between items-center, gradient-text text-4xl font-bold">SalesView Dashboard</h1>
+            <p className="text-gray-600 dark:text-gray-300 mt-2">Visualize and analyze vs-code sales performance across years</p>
           </div>
           <div className="flex items-center gap-4">
   <div className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center">

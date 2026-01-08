@@ -19,20 +19,48 @@ export default function DashboardPage() {
   const [filteredData, setFilteredData] = useState(salesData);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+  // Load dark mode from localStorage on mount
+  useEffect(() => {
+    const savedMode = localStorage.getItem("darkMode");
+    const isDark = savedMode === "true";
+    setIsDarkMode(isDark);
+    
+    // Apply to HTML
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
   useEffect(() => {
     setFilteredData(filterByThreshold(salesData, threshold));
   }, [threshold]);
 
+  // Toggle dark mode and save to localStorage
+  const toggleDarkMode = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    localStorage.setItem("darkMode", newMode.toString());
+    
+    // Apply to HTML
+    if (newMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  };
+
   const renderChart = () => {
     switch (chartType) {
       case "bar":
-       return <SalesBarChart data={filteredData} />;
+        return <SalesBarChart data={filteredData} />;
       case "line":
         return <SalesLineChart data={filteredData} />;
       case "pie":
-       return <SalesPieChart data={filteredData} />;
+        return <SalesPieChart data={filteredData} />;
       default:
-      return <SalesBarChart data={filteredData} />;
+        return <SalesBarChart data={filteredData} />;
     }
   };
 
@@ -47,7 +75,7 @@ export default function DashboardPage() {
           </div>
           <div className="flex items-center gap-4">
             <button 
-              onClick={() => setIsDarkMode(!isDarkMode)}
+              onClick={toggleDarkMode}
               className="btn-gradient flex items-center gap-2 px-4 py-2.5"
             >
               <Sparkles className="w-4 h-4" />

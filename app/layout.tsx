@@ -1,13 +1,14 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Sidebar from "@/components/charts/layout/Sidebar";
+import FixedDarkModeToggle from "@/components/FixedDarkModeToggle";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Sales Dashboard",
-  description: "Sales analytics dashboard with interactive charts",
+  title: "Sales Analytics Dashboard",
+  description: "Interactive sales analytics dashboard",
 };
 
 export default function RootLayout({
@@ -17,9 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} flex min-h-screen bg-gray-50`}>
-        <Sidebar />
-        <main className="flex-1 p-6">{children}</main>
+      <body className={inter.className}>
+        <FixedDarkModeToggle />
+        {children}
       </body>
     </html>
   );

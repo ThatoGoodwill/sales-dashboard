@@ -1,7 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowRight, BarChart3, TrendingUp, Filter, Sparkles, Shield, Zap, Users } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  TrendingUp,
+  Filter,
+  Sparkles,
+  Users,
+} from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -12,7 +19,7 @@ export default function Home() {
     const savedMode = localStorage.getItem("darkMode");
     const isDark = savedMode === "true";
     setIsDarkMode(isDark);
-    
+
     // Apply to HTML
     if (isDark) {
       document.documentElement.classList.add("dark");
@@ -26,7 +33,7 @@ export default function Home() {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
     localStorage.setItem("darkMode", newMode.toString());
-    
+
     // Apply to HTML
     if (newMode) {
       document.documentElement.classList.add("dark");
@@ -44,11 +51,11 @@ export default function Home() {
             <BarChart3 className="h-12 w-12 text-white" />
           </div>
           <h1 className="gradient-text text-5xl md:text-6xl font-bold mb-6">
-           VS CODE Sales Analytics Dashboard
+            VS CODE Sales Analytics Dashboard
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto">
-            Interactive dashboard with advanced vs code sales data visualization for 2022-2024. 
-            
+            Interactive dashboard with advanced vscode sales data visualization
+            for 2022-2024.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -58,12 +65,13 @@ export default function Home() {
               Launch Dashboard
               <ArrowRight className="ml-3 h-6 w-6" />
             </Link>
-            <button 
+            <button
+              type="button"
               onClick={toggleDarkMode}
-              className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl border-2 border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
+              className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl border-2 border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
             >
               <Sparkles className="mr-3 h-5 w-5" />
-              {isDarkMode ? 'Switch to Light' : 'Switch to Dark'}
+              {isDarkMode ? "Switch to Light" : "Switch to Dark"}
             </button>
           </div>
         </div>
@@ -74,9 +82,12 @@ export default function Home() {
             <div className="inline-block p-4 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 mb-6">
               <TrendingUp className="h-8 w-8 text-white" />
             </div>
-            <h3 className="gradient-text-alt text-2xl font-bold mb-4">Multi-Year Data Analysis</h3>
+            <h3 className="gradient-text-alt text-2xl font-bold mb-4">
+              Multi-Year Data Analysis
+            </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Compare sales performance across 2022, 2023, and 2024 with interactive visualizations and growth metrics.
+              Compare sales performance across 2022, 2023, and 2024 with
+              interactive visualizations and growth metrics.
             </p>
             <div className="flex items-center text-sm text-blue-600 dark:text-blue-400">
               <span className="inline-block w-3 h-3 gradient-bg rounded-full mr-2"></span>
@@ -88,9 +99,12 @@ export default function Home() {
             <div className="inline-block p-4 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 mb-6">
               <BarChart3 className="h-8 w-8 text-white" />
             </div>
-            <h3 className="gradient-text text-2xl font-bold mb-4">Interactive Charts</h3>
+            <h3 className="gradient-text text-2xl font-bold mb-4">
+              Interactive Charts
+            </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Switch between bar, line, and pie charts for different insights with smooth animations.
+              Switch between bar, line, and pie charts for different insights
+              with smooth animations.
             </p>
             <div className="flex items-center text-sm text-purple-600 dark:text-purple-400">
               <span className="inline-block w-3 h-3 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full mr-2"></span>
@@ -102,9 +116,12 @@ export default function Home() {
             <div className="inline-block p-4 rounded-xl bg-gradient-to-br from-green-500 to-green-600 mb-6">
               <Filter className="h-8 w-8 text-white" />
             </div>
-            <h3 className="gradient-text-alt text-2xl font-bold mb-4">Custom Filters</h3>
+            <h3 className="gradient-text-alt text-2xl font-bold mb-4">
+              Custom Filters
+            </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Set custom sales thresholds to filter and analyze data with precision and advanced controls.
+              Set custom sales thresholds to filter and analyze data with
+              precision and advanced controls.
             </p>
             <div className="flex items-center text-sm text-green-600 dark:text-green-400">
               <span className="inline-block w-3 h-3 bg-gradient-to-r from-green-500 to-green-600 rounded-full mr-2"></span>
@@ -115,7 +132,9 @@ export default function Home() {
 
         {/* Stats Section */}
         <div className="glass-effect rounded-3xl p-8 mb-16">
-          <h2 className="gradient-text text-3xl font-bold text-center mb-12">Dashboard Highlights</h2>
+          <h2 className="gradient-text text-3xl font-bold text-center mb-12">
+            Dashboard Highlights
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="text-center p-6 rounded-xl bg-blue-50 dark:bg-blue-900/20">
               <div className="text-4xl font-bold gradient-text mb-2">3+</div>
@@ -133,19 +152,18 @@ export default function Home() {
               <div className="text-4xl font-bold text-amber-600 dark:text-amber-400 mb-2">24/7</div>
               <div className="text-gray-600 dark:text-gray-400">Real-time Updates</div>
             </div>
-         
-
-       
-
-          
+          </div>
         </div>
 
         {/* CTA Section */}
         <div className="text-center">
           <div className="gradient-bg-animated rounded-3xl p-12 mb-8">
-            <h2 className="text-3xl font-bold text-white mb-4">Ready to Transform Your Sales Analysis?</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Ready to Transform Your Sales Analysis?
+            </h2>
             <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
-              Join thousands of businesses using our dashboard to make data-driven decisions and boost revenue.
+              Join thousands of businesses using our dashboard to make
+              data-driven decisions and boost revenue.
             </p>
             <Link
               href="/dashboard"
@@ -160,7 +178,6 @@ export default function Home() {
           <div className="text-center text-gray-500 dark:text-gray-400 text-sm">
             <p className="flex items-center justify-center gap-2">
               <span className="w-2 h-2 gradient-bg rounded-full animate-pulse"></span>
-             
             </p>
             <p className="mt-2">
               <span className="inline-block w-3 h-3 bg-green-500 rounded-full mr-2"></span>

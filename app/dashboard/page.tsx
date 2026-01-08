@@ -9,7 +9,7 @@ import SalesLineChart from "@/components/charts/SalesLineChart";
 import SalesPieChart from "@/components/charts/SalesPieChart";
 import { salesData, yearlySummary, filterByThreshold } from "@/lib/data";
 import { formatCurrency } from "@/lib/utils";
-import { TrendingUp, DollarSign, Calendar, BarChart3, Sparkles, Users, Target, ShoppingCart } from "lucide-react";
+import { TrendingUp, DollarSign, Calendar, BarChart3, Users, Target, ShoppingCart } from "lucide-react";
 
 type ChartType = "bar" | "line" | "pie";
 
@@ -74,17 +74,10 @@ export default function DashboardPage() {
             <p className="text-gray-600 dark:text-gray-300 mt-2">Visualize and analyze sales performance across years</p>
           </div>
           <div className="flex items-center gap-4">
-            <button 
-              onClick={toggleDarkMode}
-              className="btn-gradient flex items-center gap-2 px-4 py-2.5"
-            >
-              <Sparkles className="w-4 h-4" />
-              {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-            </button>
-            <div className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center">
-              <Users className="w-5 h-5 text-white" />
-            </div>
-          </div>
+  <div className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center">
+    <Users className="w-5 h-5 text-white" />
+  </div>
+</div>
         </div>
 
         {/* Summary Cards with Enhanced Gradients */}

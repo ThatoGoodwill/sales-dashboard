@@ -1,6 +1,18 @@
 import { ArrowRight, BarChart3, TrendingUp, Filter, Sparkles, Shield, Zap, Users } from "lucide-react";
 import Link from "next/link";
 
+// Add this useState at the top of your component
+const [isDarkMode, setIsDarkMode] = useState(false);
+
+// Add this button next to the main CTA button:
+<button 
+  onClick={() => setIsDarkMode(!isDarkMode)}
+  className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+>
+  <Sparkles className="mr-2 h-4 w-4" />
+  {isDarkMode ? 'Switch to Light' : 'Switch to Dark'}
+</button>
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">

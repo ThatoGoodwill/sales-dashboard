@@ -8,8 +8,8 @@ import {
   Filter,
   Sparkles,
   Users,
-  Sun,    // ← ADD THIS
-  Moon,   // ← ADD THIS (if not already there)
+  Sun,
+  Moon,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -59,42 +59,44 @@ export default function Home() {
             Interactive dashboard with advanced vscode sales data visualization
             for 2022-2024.
           </p>
-       <div className="flex flex-col sm:flex-row items-center gap-8">
-  {/* Launch Dashboard Button */}
-  <Link
-    href="/dashboard"
-    className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
-  >
-    <BarChart3 className="mr-3 h-5 w-5" />
-Go to Dashboard
-    <ArrowRight className="ml-3 h-5 w-5" />
-  </Link>
+          
+          {/* Fixed Button Group with Margin Spacing */}
+          <div className="flex flex-col sm:flex-row items-center justify-center">
+            {/* Launch Dashboard Button - with right margin */}
+            <Link
+              href="/dashboard"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl mr-0 sm:mr-8 mb-4 sm:mb-0"
+            >
+              <BarChart3 className="mr-3 h-5 w-5" />
+              Launch Dashboard
+              <ArrowRight className="ml-3 h-5 w-5" />
+            </Link>
 
-  {/* Divider for Desktop */}
-  <div className="hidden sm:flex items-center">
-    <div className="h-6 w-px bg-gradient-to-b from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-500"></div>
-    <span className="mx-4 text-sm text-gray-500 dark:text-gray-400">or</span>
-    <div className="h-6 w-px bg-gradient-to-b from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-500"></div>
-  </div>
+            {/* Divider for Desktop */}
+            <div className="hidden sm:flex items-center mx-4">
+              <div className="h-6 w-px bg-gradient-to-b from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-500"></div>
+              <span className="mx-4 text-sm text-gray-500 dark:text-gray-400">or</span>
+              <div className="h-6 w-px bg-gradient-to-b from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-500"></div>
+            </div>
 
-  {/* Dark Mode Button */}
-  <button
-    onClick={toggleDarkMode}
-    className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl bg-white/80 dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 backdrop-blur-sm transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
-  >
-    {isDarkMode ? (
-      <>
-        <Sun className="mr-3 h-5 w-5 text-amber-500" />
-        Switch to Light
-      </>
-    ) : (
-      <>
-        <Moon className="mr-3 h-5 w-5 text-blue-500" />
-        Switch to Dark
-      </>
-    )}
-  </button>
-</div>
+            {/* Dark Mode Button - with left margin */}
+            <button
+              onClick={toggleDarkMode}
+              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl bg-white/80 dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 backdrop-blur-sm transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl ml-0 sm:ml-4"
+            >
+              {isDarkMode ? (
+                <>
+                  <Sun className="mr-3 h-5 w-5 text-amber-500" />
+                  Switch to Light
+                </>
+              ) : (
+                <>
+                  <Moon className="mr-3 h-5 w-5 text-blue-500" />
+                  Switch to Dark
+                </>
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Features Grid with Gradient Borders */}

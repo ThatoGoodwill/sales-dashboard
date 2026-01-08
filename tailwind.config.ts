@@ -1,23 +1,31 @@
-// tailwind.config.ts - CORRECT CONFIG
+// tailwind.config.ts - UPDATED VERSION
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    // Make sure these paths match your project structure
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  darkMode: 'class', // or 'media' depending on your needs
   theme: {
     extend: {
       colors: {
+        // Define your custom colors
+        border: 'hsl(var(--border))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
-        border: 'hsl(var(--border))',
+        primary: 'hsl(var(--primary))',
+        secondary: 'hsl(var(--secondary))',
+        muted: 'hsl(var(--muted))',
+        accent: 'hsl(var(--accent))',
+        destructive: 'hsl(var(--destructive))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-        // Add all CSS variables you're using
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
       },
     },
   },

@@ -1,4 +1,4 @@
-I'd love if yopu can see my sidebar "use client";
+ "use client";
 
 import { Home, BarChart3, LineChart, PieChart, Settings, FileText, Folder, Cloud, Zap } from "lucide-react";
 import Link from "next/link";

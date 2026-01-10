@@ -1,6 +1,6 @@
-"use client";
+I'd love if yopu can see my sidebar "use client";
 
-import { Home, BarChart3, LineChart, PieChart, Users, FileText, Settings, LogOut } from "lucide-react";
+import { Home, BarChart3, LineChart, PieChart, Settings, FileText, Folder, Cloud, Zap } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -8,82 +8,78 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="w-64 bg-gray-900 text-white min-h-screen p-4 flex flex-col">
-      
-      {/* Brand */}
-      <div className="mb-8 p-4 border-b border-gray-800">
+    <div className="w-64 bg-gray-900 text-white min-h-screen p-4">
+      <div className="mb-8 p-4">
         <h1 className="text-xl font-bold flex items-center">
-          <BarChart3 className="mr-2 text-blue-500" />
-          SalesView
+          <BarChart3 className="mr-2" />
+          VS Code Dashboard
         </h1>
-        <p className="text-gray-400 text-sm mt-1">Analytics Dashboard</p>
+        <p className="text-gray-400 text-sm mt-1">Editing evolved</p>
       </div>
 
-      {/* Main Navigation */}
       <div className="mb-6">
-        <h2 className="text-xs uppercase tracking-wider text-gray-500 mb-2">
-          Main
-        </h2>
+        <h2 className="text-xs uppercase tracking-wider text-gray-500 mb-2">Start</h2>
         <ul className="space-y-1">
-          <NavItem icon={<Home size={18} />} text="Overview" href="/" pathname={pathname} />
-          <NavItem icon={<BarChart3 size={18} />} text="Dashboard" href="/dashboard" pathname={pathname} />
-          <NavItem icon={<LineChart size={18} />} text="Revenue" href="/revenue" pathname={pathname} />
-          <NavItem icon={<PieChart size={18} />} text="Reports" href="/reports" pathname={pathname} />
+          <SidebarItem icon={<FileText size={16} />} text="New File..." active={false} />
+          <SidebarItem icon={<Folder size={16} />} text="Open File..." active={true} />
+          <SidebarItem icon={<Folder size={16} />} text="Open Folder..." active={false} />
+          <SidebarItem icon={<Cloud size={16} />} text="Connect to..." active={false} />
+          <SidebarItem icon={<Zap size={16} />} text="Generate New Workspace..." active={false} />
         </ul>
       </div>
 
-      {/* Management */}
       <div className="mb-6">
-        <h2 className="text-xs uppercase tracking-wider text-gray-500 mb-2">
-          Management
-        </h2>
+        <h2 className="text-xs uppercase tracking-wider text-gray-500 mb-2">Navigation</h2>
         <ul className="space-y-1">
-          <NavItem icon={<Users size={18} />} text="Customers" href="/customers" pathname={pathname} />
-          <NavItem icon={<FileText size={18} />} text="Invoices" href="/invoices" pathname={pathname} />
+          <li>
+            <Link
+              href="/"
+              className={`flex items-center p-2 rounded ${pathname === "/" ? "bg-blue-600" : "hover:bg-gray-800"}`}
+            >
+              <Home size={18} className="mr-3" />
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/dashboard"
+              className={`flex items-center p-2 rounded ${pathname === "/dashboard" ? "bg-blue-600" : "hover:bg-gray-800"}`}
+            >
+              <BarChart3 size={18} className="mr-3" />
+              Dashboard
+            </Link>
+          </li>
         </ul>
       </div>
 
-      {/* Spacer */}
-      <div className="flex-grow"></div>
+      <div className="mb-6">
+        <h2 className="text-xs uppercase tracking-wider text-gray-500 mb-2">Walkthroughs</h2>
+        <div className="bg-gray-800 p-3 rounded text-sm">
+          <p className="font-medium">Get started with VS Code</p>
+          <p className="text-gray-400 text-xs mt-1">Customize your editor, learn the basics</p>
+        </div>
+      </div>
 
-      {/* Bottom */}
-      <div className="border-t border-gray-800 pt-4">
-        <NavItem icon={<Settings size={18} />} text="Settings" href="/settings" pathname={pathname} />
-        <button className="flex items-center w-full p-2 rounded hover:bg-red-600 mt-2 text-gray-300 hover:text-white">
-          <LogOut size={18} className="mr-3" />
-          Logout
-        </button>
+      <div className="border-t border-gray-700 pt-4">
+        <div className="bg-gray-800 p-3 rounded mb-3">
+          <p className="font-medium">GitHub Copilot (Updated)</p>
+        </div>
+        
+        <div className="bg-gray-800 p-3 rounded">
+          <p className="font-medium">Build with Agent</p>
+          <p className="text-gray-400 text-xs mt-1">All responses may be inaccurate</p>
+        </div>
       </div>
     </div>
   );
 };
 
-const NavItem = ({
-  icon,
-  text,
-  href,
-  pathname,
-}: {
-  icon: React.ReactNode;
-  text: string;
-  href: string;
-  pathname: string;
-}) => {
-  const active = pathname === href;
-
-  return (
-    <li>
-      <Link
-        href={href}
-        className={`flex items-center p-2 rounded transition ${
-          active ? "bg-blue-600 text-white" : "hover:bg-gray-800 text-gray-300"
-        }`}
-      >
-        {icon}
-        <span className="ml-3">{text}</span>
-      </Link>
-    </li>
-  );
-};
+const SidebarItem = ({ icon, text, active }: { icon: React.ReactNode; text: string; active: boolean }) => (
+  <div className={`flex items-center p-2 rounded ${active ? "bg-blue-600" : "hover:bg-gray-800"}`}>
+    {icon}
+    <span className="ml-3">{text}</span>
+    {active && <div className="ml-auto w-2 h-2 bg-green-500 rounded-full"></div>}
+  </div>
+);
 
 export default Sidebar;
